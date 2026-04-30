@@ -5,7 +5,7 @@
   <style>
     body {
       font-family: Arial, sans-serif;
-      max-width: 850px;
+      max-width: 900px;
       margin: 40px auto;
       padding: 0 20px;
       line-height: 1.6;
@@ -16,6 +16,7 @@
     h3 { margin-top: 30px; }
     a { color: #0969da; text-decoration: none; }
     hr { border: none; border-top: 3px solid #e5e7eb; margin: 35px 0; }
+    img { margin: 10px 0 25px 0; border: 1px solid #ddd; }
   </style>
 </head>
 
@@ -26,39 +27,94 @@
 
 <p>
 Graduate student in economics focused on applied econometrics, labor economics,
-policy analysis, and financial/data analysis using large public datasets.
-</p>
-
-<p>
-My work applies causal inference methods to study labor markets, economic shocks,
-policy impacts, and local economic outcomes.
+and data-driven policy analysis using large public datasets.
 </p>
 
 <hr>
 
 <h2>Research Projects</h2>
 
+<!-- BROADBAND -->
 <h3>Broadband Infrastructure and Local Economic Outcomes</h3>
+
 <p>
-Research examining whether broadband infrastructure investment improves local economic outcomes using a difference-in-differences design.
-</p>
-<p>
-<b>Paper:</b> <a href="broadband-paper.pdf">View Paper</a>
+Evaluates the impact of USDA ReConnect broadband investment on local labor markets
+using a difference-in-differences and event study framework across U.S. counties.
 </p>
 
+<p>
+<b>Methods:</b> Difference-in-Differences, Event Study, Panel Data
+</p>
+
+<p>
+<b>Paper:</b> <a href="broadband-paper.pdf">View Paper</a><br>
+<b>Data Pipeline (Python):</b><br>
+- <a href="merge_reconnect_master_v2.py">Master Merge</a><br>
+- <a href="process_ipums_income.py">IPUMS Processing</a><br>
+- <a href="map_reconnect_to_counties.py">County Mapping</a><br>
+- <a href="filter_fcc_robust.py">FCC Filtering</a><br>
+<b>Final Dataset:</b> <a href="master_reconnect_data.csv">Cleaned Dataset</a>
+</p>
+
+<p><b>Figures</b></p>
+
+<p><b>Event Study (Employment Effects):</b></p>
+<img src="fig_event_study_employment.png" width="500">
+
+<p><b>Parallel Trends (Employment):</b></p>
+<img src="fig_parallel_trends_employment.png" width="500">
+
+<p><b>Parallel Trends (Income):</b></p>
+<img src="fig_parallel_trends_income.png" width="500">
+
+<hr>
+
+<!-- COLLEGE -->
 <h3>College Closures and Local Labor Markets</h3>
+
 <p>
 Analyzes the impact of college closures on local labor markets using a difference-in-differences framework with exposure-based variation across counties.
 </p>
+
 <p>
 <b>Paper:</b> <a href="college-closure-paper.pdf">View Paper</a><br>
-<b>Presentation:</b> <a href="college-closures-slides.pdf">View Slides</a>
+<b>Presentation:</b> <a href="college-closures-slides.pdf">View Slides</a><br>
+<b>Replication Code:</b> <a href="college_closure_analysis.do">Stata Code</a><br>
+<b>Data:</b> <a href="closure.dta">Dataset</a>
 </p>
 
+<hr>
+
+<!-- LICENSING -->
+<h3>Occupational Licensing and Wage Effects</h3>
+
+<p>
+Examines the relationship between occupational licensing and wages using CPS ASEC data with weighted OLS and fixed effects models.
+</p>
+
+<p>
+<b>Key Findings:</b><br>
+- Licensing associated with ~5% higher wages in baseline models<br>
+- Effect diminishes with controls, suggesting selection bias<br>
+- No strong differential effect across racial groups
+</p>
+
+<p>
+<b>Tables:</b> <a href="table_p1.docx">Main Results</a><br>
+<b>Additional Results:</b> <a href="table_p2.docx">Heterogeneity</a><br>
+<b>Replication Code:</b> <a href="04_make_tables.do">Stata Code</a><br>
+<b>Data:</b> <a href="analysis_ready.dta">Dataset</a>
+</p>
+
+<hr>
+
+<!-- EITC -->
 <h3>Labor Supply and the Earned Income Tax Credit</h3>
+
 <p>
 Presentation analyzing how the Earned Income Tax Credit affects labor force participation using a natural experiment framework.
 </p>
+
 <p>
 <b>Presentation:</b> <a href="eitc-presentation.pdf">View Slides</a>
 </p>
@@ -69,14 +125,13 @@ Presentation analyzing how the Earned Income Tax Credit affects labor force part
 
 <p>
 Stata<br>
-R<br>
 Python<br>
+R<br>
 Excel<br>
 LaTeX<br>
 ACS / CPS Data<br>
 Difference-in-Differences<br>
 Event Study Design<br>
-Shift-Share Analysis<br>
 Regression Analysis
 </p>
 
