@@ -11,7 +11,7 @@ set more off
 set maxvar 10000
 
 * Set your working directory
-cd "C:\Users\YourName\Documents\College_Closure_Project\"
+cd "C:\Users\juanc\OneDrive\Documents\College_Closure_Project\"
 
 * Create folders for output
 cap mkdir "output"
@@ -28,7 +28,21 @@ use "ipums_acs_2009_2019.dta", clear
 keep if age >= 16 & age <= 64
 
 * Create 5-digit county FIPS code (combining state and county)
-gen countyfip = statefip*1000 + countyfip
+* First, check if we need to create it or if it already exists
+capture confirm variable countyfip
+if _rc == 0 {
+    * countyfip exists - check if it's already 5-digit or needs to be created
+    sum countyfip
+    if r(max) < 1000 {
+        * It's just the county portion, need to add state
+        replace countyfip = statefip*1000 + countyfip
+    }
+    * If max >= 1000, it's already the full 5-digit code, keep as is
+}
+else {
+    * countyfip doesn't exist, create it
+    gen countyfip = statefip*1000 + countyfip
+}
 label variable countyfip "5-digit County FIPS code"
 
 * Keep only observations with valid county codes
@@ -151,7 +165,7 @@ save "panel_outcomes.dta", replace
 ********************************************************************************
 
 * Load closure data
-use "closure.dta", clear
+use "college_closures.dta", clear
 
 * Keep only closures from 2010-2019 (drop always-treated)
 keep if earliestyear >= 2010 & earliestyear <= 2019
@@ -228,7 +242,9 @@ esttab pre post using "output/tables/table1_summary_stats.xlsx", ///
 use "analysis_data.dta", clear
 
 * Encode county for fixed effects
-encode countyfip, gen(county_id)
+* countyfip is numeric, so use egen group instead of encode
+egen county_id = group(countyfip)
+label variable county_id "County ID for FE"
 
 eststo clear
 
@@ -321,6 +337,9 @@ esttab wage1 wage2 logwage1 logwage2 using "output/tables/table3_wage_results.xl
 
 use "analysis_data.dta", clear
 
+* Recreate county_id for fixed effects
+egen county_id = group(countyfip)
+
 * Create exposure quartiles
 xtile exposure_quartile = exposure if year == 2010, nq(4)
 bysort countyfip: egen exposure_q = max(exposure_quartile)
@@ -353,6 +372,9 @@ esttab hetero using "output/tables/table4_heterogeneity.tex", ///
 
 use "analysis_data.dta", clear
 
+* Recreate county_id for fixed effects
+egen county_id = group(countyfip)
+
 * Figure 1: Distribution of closures over time
 preserve
 collapse (count) n_closures=countyfip, by(earliestyear)
@@ -376,9 +398,9 @@ gen event_time = year - earliestyear
 keep if event_time >= -5 & event_time <= 5
 
 * Run event study regression
-reghdfe employment_rate ib(-1).event_time ///
+reghdfe employment_rate i.event_time ///
     pct_female pct_black pct_asian pct_hispanic ///
-    median_age pct_bachelors_plus, ///
+    median_age pct_bachelors_plus if event_time != -1, ///
     absorb(county_id year) vce(cluster county_id)
 
 * Extract coefficients
@@ -461,6 +483,9 @@ restore
 ********************************************************************************
 
 use "analysis_data.dta", clear
+
+* Recreate county_id for fixed effects
+egen county_id = group(countyfip)
 
 eststo clear
 
