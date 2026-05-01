@@ -8,7 +8,7 @@
       max-width: 900px;
       margin: 40px auto;
       padding: 0 20px;
-      line-height: 1.6;
+      line-height: 1.7;
       color: #24292f;
     }
     h1 { font-size: 42px; margin-bottom: 5px; }
@@ -16,7 +16,6 @@
     h3 { margin-top: 30px; }
     a { color: #0969da; text-decoration: none; }
     hr { border: none; border-top: 3px solid #e5e7eb; margin: 35px 0; }
-    img { margin: 10px 0 25px 0; border: 1px solid #ddd; max-width: 100%; }
   </style>
 </head>
 
@@ -27,7 +26,9 @@
 
 <p>
 Graduate student in economics focused on applied econometrics, labor economics,
-and data-driven policy analysis using large public datasets.
+and data-driven policy analysis using large public datasets. My work applies
+causal inference methods to study labor markets, infrastructure investment,
+and local economic outcomes.
 </p>
 
 <hr>
@@ -37,8 +38,14 @@ and data-driven policy analysis using large public datasets.
 <h3>Broadband Infrastructure and Local Economic Outcomes</h3>
 
 <p>
-Evaluates the impact of USDA ReConnect broadband investment on local labor markets
+This project evaluates the impact of USDA ReConnect broadband investment on local labor markets
 using a difference-in-differences and event study framework across U.S. counties.
+</p>
+
+<p>
+The analysis combines USDA ReConnect program data with county-level employment, income,
+and rural classification data to examine whether broadband infrastructure investment produces
+measurable short-run effects on employment and household income.
 </p>
 
 <p>
@@ -48,60 +55,32 @@ using a difference-in-differences and event study framework across U.S. counties
 <p>
 <b>Paper:</b> <a href="broadband-paper.pdf">View Paper</a><br>
 <b>Presentation:</b> <a href="broadband-slides.pdf">View Slides</a><br>
-<b>Data Pipeline (Python):</b><br>
-- <a href="merge_reconnect_master_v2.py">Master Merge</a><br>
-- <a href="process_ipums_income.py">IPUMS Processing</a><br>
-- <a href="map_reconnect_to_counties.py">County Mapping</a><br>
-- <a href="filter_fcc_robust.py">FCC Filtering</a><br>
-<b>Final Dataset:</b> <a href="master_reconnect_data.csv">Cleaned Dataset</a>
+<b>Analysis Code:</b> <a href="reconnect_analysis.do">Stata Code</a>
 </p>
-
-<p><b>Figures</b></p>
-
-<p><b>Event Study: Employment Effects</b></p>
-<img src="fig_event_study_employment.png" width="500">
-
-<p><b>Parallel Trends: Employment</b></p>
-<img src="fig_parallel_trends_employment.png" width="500">
-
-<p><b>Parallel Trends: Income</b></p>
-<img src="fig_parallel_trends_income.png" width="500">
 
 <hr>
 
 <h3>College Closures and Local Labor Markets</h3>
 
 <p>
-Analyzes the impact of college closures on local labor markets using a difference-in-differences framework with exposure-based variation across counties.
+This project analyzes how college closures affect local labor market outcomes using a
+difference-in-differences framework with exposure-based variation across counties.
+</p>
+
+<p>
+The study examines whether areas more exposed to college closures experience stronger
+employment effects, highlighting the role of local institutions as economic anchors in
+regional labor markets.
+</p>
+
+<p>
+<b>Methods:</b> Difference-in-Differences, Exposure-Based Analysis, Panel Data
 </p>
 
 <p>
 <b>Paper:</b> <a href="college-closure-paper.pdf">View Paper</a><br>
 <b>Presentation:</b> <a href="college-closures-slides.pdf">View Slides</a><br>
-<b>Replication Code:</b> <a href="college_closure_analysis.do">Stata Code</a><br>
-<b>Data:</b> <a href="closure.dta">Dataset</a>
-</p>
-
-<hr>
-
-<h3>Occupational Licensing and Wage Effects</h3>
-
-<p>
-Examines the relationship between occupational licensing and wages using CPS ASEC data with weighted OLS and fixed effects models.
-</p>
-
-<p>
-<b>Key Findings:</b><br>
-- Licensing is associated with about 5% higher wages in baseline models<br>
-- Effect diminishes with controls, suggesting selection bias<br>
-- No strong differential effect across racial groups
-</p>
-
-<p>
-<b>Tables:</b> <a href="table_p1.docx">Main Results</a><br>
-<b>Additional Results:</b> <a href="table_p2.docx">Heterogeneity</a><br>
-<b>Replication Code:</b> <a href="04_make_tables.do">Stata Code</a><br>
-<b>Data:</b> <a href="analysis_ready.dta">Dataset</a>
+<b>Replication Code:</b> <a href="college_closure_analysis.do">Stata Code</a>
 </p>
 
 <hr>
@@ -109,11 +88,13 @@ Examines the relationship between occupational licensing and wages using CPS ASE
 <h3>Earned Income Tax Credit and Labor Supply (Replication)</h3>
 
 <p>
-Presentation analyzing how the Earned Income Tax Credit affects labor force participation, based on an existing empirical study.
+This presentation analyzes how the Earned Income Tax Credit affects labor force participation,
+based on an existing empirical study.
 </p>
 
 <p>
-Focuses on understanding identification strategy, causal effects, and policy implications from a natural experiment framework.
+The project focuses on understanding the identification strategy, causal interpretation,
+and policy implications of a natural experiment framework in labor economics.
 </p>
 
 <p>
@@ -122,7 +103,7 @@ Focuses on understanding identification strategy, causal effects, and policy imp
 
 <hr>
 
-<h2>Tools</h2>
+<h2>Tools & Methods</h2>
 
 <p>
 Stata<br>
@@ -133,6 +114,7 @@ LaTeX<br>
 ACS / CPS Data<br>
 Difference-in-Differences<br>
 Event Study Design<br>
+Panel Data Analysis<br>
 Regression Analysis
 </p>
 
