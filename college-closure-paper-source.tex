@@ -1,0 +1,559 @@
+\documentclass[12pt]{article}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{caption}
+
+\title{College Closures and Local Labor Markets: A Shift-Share Analysis}
+\author{Juan Cosme, Ethan Kaiser, Ian Murray, Zahid Siddique }
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+This paper examines the effects of college closures on local labor markets between 2010 and 2019 using a difference-in-differences approach combined with shift-share exposure measures. We find that college closures have heterogeneous effects across counties, with larger negative impacts in areas with higher baseline education sector employment shares.
+\end{abstract}
+
+\tableofcontents
+\clearpage
+
+\section{Introduction}
+
+In the past decade, the United States has experienced a notable increase in college closures. These closures are concentrated among for-profit and private colleges, but may have broader implications for academic institutions. With acknowledgment to previous literature on the impacts of education, this would suggest that the affect of these closures is not only limited to enrolled students but also to the communities in which these colleges operate. Colleges often operate as anchor institutions for their local economies, providing stable employment, increasing consumption, and providing a channel to increase human capital and skill diversity. As such, when a college closes, we might expect economic consequences beyond educational disruption.
+
+The basis of this claim takes from a growing body of research on the role of colleges in local labor markets. Howard, Weinstein, and Yang (2022) show that regional public universities contribute to local economic resilience by stabilizing employment and consumption during negative shocks. Howard and Weinstein (2022) further establish that proximity to regional universities increases intergenerational mobility, especially for students with low parental income. On the other hand, the socioeconomic benefits of these 'anchor institutions' and regional universities may not be nearly as potent for private, for-profit colleges that make up a larger portion of college closures. Burns et al. (2022) National Student Clearinghouse study documents that students from for-profit institutions have weaker post-graduation outcomes and higher debt burdens. This study also explores student outcomes after college closure and finds that less than half of displaced students successfully reenroll, and that these individuals likelihood of college completion sharply declines after closure.
+
+Considering this, relatively little empirical work examines how closures affect local labor markets; particularly whether labor market impacts of college closure differ across communities depending on their reliance on the education sector for employment. This leads to the focus of this paper: How do college closures affect local labor market outcomes, and how do these effects differ across counties with varying levels of dependence on the education sector? We address this question by estimating the differential employment and wage effects of closures in counties with higher versus lower education employment exposure, using the shift-share difference-in-differences model described in our empirical strategy.
+
+In this paper we examine the labor market effects of college closures between 2010 and 2019, combining a difference-in-differences framework with a shift-share exposure measure. Using county-level ACS labor market outcomes merged with institutional closure data, we estimate how the magnitude of closure effects varies with the pre-closure share of county employment in the education sector. Our contribution is to show that the local consequences of closures are heterogeneous: counties with higher baseline education employment shares experience larger declines in employment and higher increases in unemployment following a closure, indicating that colleges play a localized labor market stabilization role. In doing so, we extend the literature beyond student outcomes to show that college closures represent a form of localized economic shock with distributional consequences across regions.
+
+\section{Data and Methodology}
+
+\subsection{Data Sources}
+
+We use two main data sources:
+
+\begin{itemize}
+\item \textbf{IPUMS American Community Survey (ACS):} Microdata from 2009-2019, including 108 million person-year observations covering 424 U.S. counties. We aggregate individual-level data to create county-year employment outcomes.
+
+\item \textbf{Treatment and Control Groups:} Our treatment group consists of 119 counties experiencing college closures between 2010-2019. Our control group includes 305 counties without closures during this period, drawn from the same IPUMS extract to ensure comparability.
+
+\item \textbf{College Closure Data:} Institutional closure tracking from IPEDS, identifying the timing and location of 213 closures across treated counties.
+\end{itemize}
+
+\textbf{Sample Construction:} We construct a balanced panel of 424 counties over 10 years (2010-2019), yielding 4,056 county-year observations for our main analysis. For comparison, we also estimate our original treated-only specification using only the 119 treated counties (1,138 observations).
+
+\subsection{Empirical Strategy}
+
+We employ a difference-in-differences design comparing counties that experienced college closures (treated) to counties without closures (control), combined with shift-share exposure measures to examine treatment effect heterogeneity:
+
+\begin{equation}
+Y_{ct} = \beta_0 + \beta_1 Treated_c + \beta_2 Post_t + \beta_3 (Treated_c \times Post_t) + \beta_4 (Exposure_c \times Post_t) + X_{ct}\gamma + \alpha_c + \delta_t + \epsilon_{ct}
+\end{equation}
+
+where $Y_{ct}$ is the employment rate in county $c$ at time $t$, $Treated_c$ indicates counties with closures, $Post_t$ equals 1 for years after 2015 (the median closure year), $Exposure_c$ is the baseline (2009) education employment share, $X_{ct}$ are time-varying demographic controls, and $\alpha_c$ and $\delta_t$ are county and year fixed effects.
+
+\textbf{Key Coefficients:}
+\begin{itemize}
+\item $\beta_3$ captures the average treatment effect of closures
+\item $\beta_4$ captures how effects vary with exposure intensity
+\item Standard errors are clustered at the county level (424 clusters)
+\end{itemize}
+
+\textbf{Identification:} Our design requires that, absent treatment, employment trends in treated and control counties would have been parallel (conditional on controls and fixed effects). We test this assumption with an event study specification in Section 3.3.
+
+\clearpage
+
+\section{Results}
+
+\subsection{Summary Statistics}
+
+Table 1 presents summary statistics comparing pre- and post-closure periods. Mean employment rates increased from 68.3\% in the pre-period to 70.3\% in the post-period, while unemployment rates declined from 6.9\% to 5.4\%. Median wages rose from \$30,084 to \$35,118. The baseline education employment exposure averages 8.6\% across treated counties.
+
+\begin{table}[H]
+\centering
+\caption{Summary Statistics by Treatment Period}
+\label{tab:summary}
+\small
+\begin{tabular}{lcccccc}
+\toprule
+& \multicolumn{3}{c}{Pre-Period} & \multicolumn{3}{c}{Post-Period} \\
+\cmidrule(lr){2-4} \cmidrule(lr){5-7}
+Variable & Mean & SD & Median & Mean & SD & Median \\
+\midrule
+Employment Rate (\%) & 68.26 & 4.91 & 68.15 & 70.32 & 5.08 & 70.53 \\
+Unemployment Rate (\%) & 6.86 & 1.66 & 6.78 & 5.38 & 1.69 & 5.09 \\
+Labor Force Participation (\%) & 75.12 & 3.97 & 75.03 & 75.70 & 4.16 & 75.97 \\
+Median Wage (\$) & 30,084 & 6,419 & 28,807 & 35,118 & 7,993 & 33,510 \\
+Population & 380,427 & 321,060 & 277,515 & 533,677 & 429,395 & 385,302 \\
+Education Exposure & 0.086 & 0.020 & 0.082 & 0.088 & 0.022 & 0.084 \\
+\midrule
+Observations & \multicolumn{3}{c}{605} & \multicolumn{3}{c}{533} \\
+Counties & \multicolumn{3}{c}{119} & \multicolumn{3}{c}{119} \\
+\bottomrule
+\end{tabular}
+\captionsetup{justification=raggedright,singlelinecheck=false}
+\vspace{0.2cm}
+\textit{Note:} This table shows means, standard deviations, and medians for key variables in pre-closure (before earliestyear) and post-closure (after earliestyear) periods. Sample includes 119 counties with closures from 2010-2019.
+\end{table}
+
+\clearpage
+
+\subsection{Main Results}
+
+We present results from four specifications in Table 2: (1) a basic difference-in-differences comparing treated counties to controls, (2) our main specification adding the exposure interaction, (3) a triple-difference specification, and (4) our original treated-only specification for comparison.
+
+\textbf{Key Findings:}
+
+\begin{itemize}
+\item \textbf{Average Treatment Effect (Column 1):} Treated counties experience employment rates 0.444 percentage points higher than control counties post-closure (SE = 0.133, p = 0.001), indicating a positive average effect that masks substantial heterogeneity.
+
+\item \textbf{Heterogeneous Effects (Column 2):} The interaction term (exposure $\times$ post) is $-4.004$ (SE = 1.865, p = 0.032), statistically significant at the 5\% level. This indicates that a 1 percentage point increase in education employment share is associated with a 4.0 percentage point larger decline in employment rates post-closure.
+
+\item \textbf{Triple-Difference (Column 3):} The three-way interaction is not statistically significant, suggesting that exposure-related employment trends exist in both treated and control counties.
+
+\item \textbf{Comparison to Treated-Only (Column 4):} The treated-only specification yields a similar point estimate ($-4.930$) but lacks statistical power (p = 0.265). Adding control counties reduces the standard error by 58\%, making the result statistically significant.
+
+\item \textbf{Interpretation:} At mean exposure (8.7\%), the net effect is approximately $0.444 + (-4.0 \times 0.087) \approx 0.096$ percentage points. Low-exposure counties (5\% exposure) experience net gains of $+0.24$pp, while high-exposure counties (15\% exposure) experience net losses of $-0.16$pp.
+\end{itemize}
+
+\begin{table}[H]
+\centering
+\caption{Main Results: Treatment vs. Control Counties}
+\label{tab:main_controls}
+\small
+\begin{tabular}{lcccc}
+\toprule
+ & (1) & (2) & (3) & (4) \\
+ & Basic DiD & With Exposure & Triple-Diff & Treated Only \\
+\midrule
+Treated $\times$ Post & 0.444*** & 0.412*** & 0.480 & \\
+ & (0.133) & (0.134) & (0.453) & \\
+ & & & & \\
+Exposure $\times$ Post & & $-4.004**$ & $-3.900*$ & $-4.930$ \\
+ & & (1.865) & (2.062) & (4.402) \\
+ & & & & \\
+Treated $\times$ Exposure $\times$ Post & & & $-0.779$ & \\
+ & & & (4.846) & \\
+ & & & & \\
+Post-Closure & $-0.247*$ & 0.134 & 0.125 & 0.544 \\
+ & (0.135) & (0.231) & (0.242) & (0.423) \\
+\midrule
+Controls & Yes & Yes & Yes & Yes \\
+County FE & Yes & Yes & Yes & Yes \\
+Year FE & Yes & Yes & Yes & Yes \\
+Control Counties & Yes & Yes & Yes & No \\
+Observations & 4,056 & 4,056 & 4,056 & 1,138 \\
+Counties & 424 & 424 & 424 & 119 \\
+R-squared & 0.978 & 0.978 & 0.978 & 0.979 \\
+Clusters & 424 & 424 & 424 & 119 \\
+\bottomrule
+\end{tabular}
+\captionsetup{justification=raggedright,singlelinecheck=false}
+\vspace{0.2cm}
+\textit{Note:} This table reports difference-in-differences estimates comparing 119 treated counties (with closures) to 305 control counties (without closures). Controls include \% female, \% Black, \% Asian, \% Hispanic, median age, and \% Bachelor's+. Standard errors clustered at county level in parentheses. * p$<$0.10, ** p$<$0.05, *** p$<$0.01.
+\end{table}
+
+\clearpage
+
+\subsection{Identification Validation}
+
+\subsubsection{Balance Between Treatment and Control}
+
+Table 3 compares pre-treatment characteristics between treated and control counties. While some differences exist—treated counties have higher unemployment rates, more Black residents, and higher education levels—our specifications control for these observable differences.
+
+\begin{table}[H]
+\centering
+\caption{Balance Table: Pre-Treatment Characteristics (2010)}
+\label{tab:balance}
+\small
+\begin{tabular}{lcccc}
+\toprule
+ & Treated & Control & Difference & Std. Error \\
+ & (1) & (2) & (3) & (4) \\
+\midrule
+Employment Rate (\%) & 69.78 & 68.97 & $-0.82$ & (0.540) \\
+Unemployment Rate (\%) & 6.23 & 5.75 & $-0.48***$ & (0.150) \\
+Exposure (\%) & 8.70 & 9.36 & $0.66**$ & (0.304) \\
+\% Female & 50.67 & 50.18 & $-0.48***$ & (0.140) \\
+\% Black & 15.53 & 10.30 & $-5.24***$ & (1.311) \\
+\% Hispanic & 12.44 & 12.05 & $-0.39$ & (1.539) \\
+Median Age & 39.06 & 39.33 & $0.27$ & (0.168) \\
+\% Bachelor's+ & 26.53 & 24.25 & $-2.28**$ & (0.958) \\
+\midrule
+N & 119 & 305 & \multicolumn{2}{c}{424} \\
+\bottomrule
+\end{tabular}
+\captionsetup{justification=raggedright,singlelinecheck=false}
+\vspace{0.2cm}
+\textit{Note:} T-test for difference in means between treated and control counties in 2010 (pre-treatment). * p$<$0.10, ** p$<$0.05, *** p$<$0.01.
+\end{table}
+
+\subsubsection{Parallel Trends}
+
+Figure 1 presents event study estimates using treatment and control counties. Pre-treatment coefficients (2010-2013) are small and statistically insignificant, supporting the parallel trends assumption. Post-treatment effects emerge in 2016 and grow over time, reaching 0.52 percentage points by 2019.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.85\textwidth]{event_study_WITH_CONTROLS.png}
+\caption{Event Study: Parallel Trends Test}
+\label{fig:event_controls}
+\captionsetup{justification=raggedright,singlelinecheck=false}
+\small
+\textit{Note:} This figure plots coefficients on Treated $\times$ Year interactions with 2014 as the reference year. Pre-treatment coefficients test the parallel trends assumption. Whiskers show 95\% confidence intervals. Standard errors clustered at county level.
+\end{figure}
+
+\clearpage
+
+\subsection{Treated-Only Specification}
+
+Table 4 shows our original treated-only difference-in-differences estimates for comparison with the treatment-control results.
+
+\textbf{Key Findings:}
+
+\begin{itemize}
+\item \textbf{Employment Rate (Column 2):} The interaction term (exposure $\times$ post) is -4.930 (SE = 4.40, p = 0.265), suggesting that a 1 percentage point increase in education employment share is associated with a 4.9 percentage point larger decline in employment rates post-closure
+
+\item \textbf{Unemployment Rate (Column 4):} The interaction term is +5.891 (SE = 3.08, p = 0.058), marginally significant, indicating differential unemployment effects by exposure
+
+\item \textbf{Interpretation:} Counties with higher education sector concentration experience more negative labor market impacts from college closures
+\end{itemize}
+
+\begin{table}[H]
+\centering
+\caption{Treated-Only Results: Effect of College Closures on Labor Market Outcomes}
+\label{tab:main}
+\small
+\begin{tabular}{lcccc}
+\toprule
+& \multicolumn{2}{c}{Employment Rate} & \multicolumn{2}{c}{Unemployment Rate} \\
+\cmidrule(lr){2-3} \cmidrule(lr){4-5}
+& (1) & (2) & (3) & (4) \\
+\midrule
+Post-Closure & 0.114 & 0.544** & $-0.195**$ & $-0.709**$ \\
+& (0.125) & (0.423) & (0.091) & (0.284) \\
+& & & & \\
+Exposure $\times$ Post & & $-4.930*$ & & 5.891* \\
+& & (4.402) & & (3.079) \\
+& & & & \\
+\% Female & 0.214 & 0.196 & $-0.197$ & $-0.175$ \\
+& (0.303) & (0.307) & (0.168) & (0.167) \\
+& & & & \\
+\% Black & $-0.210$ & $-0.215$ & $-0.032$ & $-0.027$ \\
+& (0.135) & (0.135) & (0.120) & (0.119) \\
+& & & & \\
+\% Asian & 0.402** & 0.406** & $-0.147$ & $-0.152$ \\
+& (0.176) & (0.176) & (0.140) & (0.137) \\
+& & & & \\
+\% Hispanic & $-0.011$ & $-0.013$ & $-0.156**$ & $-0.153**$ \\
+& (0.082) & (0.081) & (0.063) & (0.062) \\
+& & & & \\
+Median Age & $-0.203$ & $-0.252$ & $-0.315$ & $-0.258$ \\
+& (0.384) & (0.381) & (0.267) & (0.262) \\
+& & & & \\
+\% Bachelor's+ & 0.381*** & 0.379*** & $-0.067$ & $-0.066$ \\
+& (0.086) & (0.085) & (0.055) & (0.054) \\
+\midrule
+County FE & Yes & Yes & Yes & Yes \\
+Year FE & Yes & Yes & Yes & Yes \\
+Observations & 1,138 & 1,138 & 1,138 & 1,138 \\
+R-squared & 0.979 & 0.979 & 0.914 & 0.915 \\
+Clusters & 119 & 119 & 119 & 119 \\
+\bottomrule
+\end{tabular}
+\captionsetup{justification=raggedright,singlelinecheck=false}
+\vspace{0.2cm}
+\textit{Note:} This table reports difference-in-differences estimates using treated counties only. Standard errors clustered at county level in parentheses. * p$<$0.10, ** p$<$0.05, *** p$<$0.01.
+\end{table}
+
+\clearpage
+
+\subsection{Wage Effects}
+
+Table 5 presents effects on wage outcomes.
+
+\textbf{Key Findings:}
+
+\begin{itemize}
+\item \textbf{Median Wages (Column 2):} No significant effects detected (-\$1,865, p = 0.700)
+
+\item \textbf{Log Wages (Column 4):} Positive and marginally significant interaction (0.191, p = 0.056), suggesting relative wage increases in high-exposure counties post-closure
+
+\item \textbf{Interpretation:} Possible compositional effects - lower-wage education workers leaving the labor force
+\end{itemize}
+
+\begin{table}[H]
+\centering
+\caption{Effect of College Closures on Wage Outcomes}
+\label{tab:wages}
+\small
+\begin{tabular}{lcccc}
+\toprule
+& \multicolumn{2}{c}{Median Wage (\$)} & \multicolumn{2}{c}{Log Wage} \\
+\cmidrule(lr){2-3} \cmidrule(lr){4-5}
+& (1) & (2) & (3) & (4) \\
+\midrule
+Post-Closure & $-53.815$ & 109.087 & $-0.003$ & $-0.020**$ \\
+& (105.642) & (452.801) & (0.003) & (0.010) \\
+& & & & \\
+Exposure $\times$ Post & & $-1,865$ & & 0.191* \\
+& & (4,829) & & (0.099) \\
+& & & & \\
+\% Female & $-632$ & $-639$ & $-0.008$ & $-0.007$ \\
+& (381) & (385) & (0.009) & (0.009) \\
+& & & & \\
+\% Black & $-274**$ & $-276**$ & $-0.009***$ & $-0.009***$ \\
+& (128) & (129) & (0.003) & (0.003) \\
+& & & & \\
+\% Asian & 731*** & 733*** & $-0.007$ & $-0.007$ \\
+& (217) & (215) & (0.005) & (0.005) \\
+& & & & \\
+\% Hispanic & $-288***$ & $-289***$ & $-0.001$ & $-0.001$ \\
+& (100) & (101) & (0.003) & (0.003) \\
+& & & & \\
+Median Age & $-503$ & $-522$ & 0.001 & 0.003 \\
+& (673) & (685) & (0.011) & (0.011) \\
+& & & & \\
+\% Bachelor's+ & 777*** & 776*** & 0.009*** & 0.009*** \\
+& (184) & (184) & (0.003) & (0.003) \\
+\midrule
+County FE & Yes & Yes & Yes & Yes \\
+Year FE & Yes & Yes & Yes & Yes \\
+Observations & 1,138 & 1,138 & 1,138 & 1,138 \\
+R-squared & 0.988 & 0.988 & 0.986 & 0.986 \\
+Clusters & 119 & 119 & 119 & 119 \\
+\bottomrule
+\end{tabular}
+\captionsetup{justification=raggedright,singlelinecheck=false}
+\vspace{0.2cm}
+\textit{Note:} This table reports difference-in-differences estimates for wage outcomes. Standard errors clustered at county level in parentheses. * p$<$0.10, ** p$<$0.05, *** p$<$0.01.
+\end{table}
+
+\clearpage
+
+\subsection{Heterogeneity by Exposure Level}
+
+Table 6 examines heterogeneity across quartiles of baseline education employment exposure. Figure 5 visualizes these results, showing a clear monotonic pattern: counties in the highest exposure quartile (Q4, mean exposure 12.4\%) experience employment rates 0.48 percentage points lower than the lowest quartile (Q1, mean exposure 6.2\%), with this difference marginally significant (p = 0.097).
+
+This pattern is consistent with our continuous interaction specification (Table 2, Column 2), which finds that each 1 percentage point increase in exposure is associated with a 4.0 percentage point larger employment decline.
+
+\begin{table}[H]
+\centering
+\caption{Heterogeneous Effects by Education Sector Exposure}
+\label{tab:hetero}
+\small
+\begin{tabular}{lcc}
+\toprule
+\multicolumn{3}{l}{Dependent Variable: Employment Rate (\%)} \\
+\midrule
+& Coefficient & SE \\
+\midrule
+Post-Closure & 0.352* & (0.211) \\
+& & \\
+Exposure Quartile 2 $\times$ Post & $-0.266$ & (0.266) \\
+& & \\
+Exposure Quartile 3 $\times$ Post & $-0.222$ & (0.294) \\
+& & \\
+Exposure Quartile 4 $\times$ Post & $-0.480*$ & (0.287) \\
+& & \\
+\% Female & 0.171 & (0.314) \\
+\% Black & $-0.225*$ & (0.135) \\
+\% Asian & 0.413** & (0.178) \\
+\% Hispanic & $-0.018$ & (0.081) \\
+Median Age & $-0.255$ & (0.391) \\
+\% Bachelor's+ & 0.378*** & (0.085) \\
+\midrule
+County FE & \multicolumn{2}{c}{Yes} \\
+Year FE & \multicolumn{2}{c}{Yes} \\
+Observations & \multicolumn{2}{c}{1,138} \\
+R-squared & \multicolumn{2}{c}{0.979} \\
+Clusters & \multicolumn{2}{c}{119} \\
+\bottomrule
+\end{tabular}
+\captionsetup{justification=raggedright,singlelinecheck=false}
+\vspace{0.2cm}
+\textit{Note:} Quartile 1 (lowest education employment exposure) is the omitted category. Standard errors clustered at county level in parentheses. * p$<$0.10, ** p$<$0.05, *** p$<$0.01.
+\end{table}
+
+\clearpage
+
+\subsection{Robustness Checks}
+
+Table 7 demonstrates robustness across different control specifications. The key coefficient on exposure $\times$ post remains stable across specifications: $-3.56$ with no controls, $-3.93$ with basic controls, and $-3.86$ with full controls. This stability provides confidence that our main findings are not driven by omitted variable bias.
+
+\begin{table}[H]
+\centering
+\caption{Robustness: Different Control Specifications}
+\label{tab:robust}
+\small
+\begin{tabular}{lccc}
+\toprule
+\multicolumn{4}{l}{Dependent Variable: Employment Rate (\%)} \\
+\midrule
+& (1) & (2) & (3) \\
+& No Controls & Basic Controls & Full Controls \\
+\midrule
+Post-Closure & 0.462 & 0.492 & 0.445 \\
+& (0.439) & (0.440) & (0.434) \\
+& & & \\
+Exposure $\times$ Post & $-3.559$ & $-3.932$ & $-3.857$ \\
+& (4.590) & (4.610) & (4.564) \\
+& & & \\
+\% Female & & $-0.198$ & 0.134 \\
+& & (0.347) & (0.324) \\
+& & & \\
+\% Black & & & $-0.203$ \\
+& & & (0.130) \\
+& & & \\
+\% Asian & & & 0.446** \\
+& & & (0.178) \\
+& & & \\
+\% Hispanic & & & 0.003 \\
+& & & (0.078) \\
+& & & \\
+Median Age & & 0.025 & $-0.168$ \\
+& & (0.459) & (0.363) \\
+& & & \\
+\% Bachelor's+ & & & 0.460*** \\
+& & & (0.083) \\
+& & & \\
+\% Some College & & & 0.206** \\
+& & & (0.086) \\
+\midrule
+County FE & Yes & Yes & Yes \\
+Year FE & Yes & Yes & Yes \\
+Observations & 1,138 & 1,138 & 1,138 \\
+R-squared & 0.975 & 0.975 & 0.980 \\
+Clusters & 119 & 119 & 119 \\
+\bottomrule
+\end{tabular}
+\captionsetup{justification=raggedright,singlelinecheck=false}
+\vspace{0.2cm}
+\textit{Note:} Column 1 includes only county and year fixed effects. Column 2 adds basic demographic controls (\% female, median age). Column 3 includes full controls. Standard errors clustered at county level in parentheses. * p$<$0.10, ** p$<$0.05, *** p$<$0.01.
+\end{table}
+
+\clearpage
+
+\section{Figures}
+
+\subsection{Descriptive Patterns}
+
+Figure 2 shows the temporal distribution of college closures, with a marked increase after 2015. Figure 3 displays the distribution of baseline education employment shares, ranging from 5.5\% to 20\%, with most counties between 6-12\%.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{figure1_closures_by_year.png}
+\caption{Distribution of College Closures by Year (2010-2019)}
+\label{fig:closures}
+\captionsetup{justification=raggedright,singlelinecheck=false}
+\small
+\textit{Note:} This figure shows the number of counties experiencing first college closures in each year. Closures increased substantially after 2015, coinciding with regulatory changes and the closure of for-profit institutions.
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{figure3_exposure_dist.png}
+\caption{Distribution of Education Sector Exposure}
+\label{fig:exposure}
+\captionsetup{justification=raggedright,singlelinecheck=false}
+\small
+\textit{Note:} This histogram shows the distribution of baseline (2009) education employment shares across the 119 treated counties in our sample.
+\end{figure}
+
+\clearpage
+
+\subsection{Event Study Analysis}
+
+Figure 4 presents event study estimates using treated counties only, showing no pre-trends in employment rates before closure (validating parallel trends), with effects emerging 1-2 years post-closure.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.85\textwidth]{figure2_event_study.png}
+\caption{Event Study: Employment Rate (Treated Counties Only)}
+\label{fig:event}
+\captionsetup{justification=raggedright,singlelinecheck=false}
+\small
+\textit{Note:} This figure plots event study coefficients for employment rates using treated counties only, relative to the year of closure (t=0). The reference period is t=-1. Point estimates and 95\% confidence intervals shown. For a parallel trends test using treatment and control counties, see Figure 1.
+\end{figure}
+
+\clearpage
+
+\subsection{Heterogeneity Analysis}
+
+Figure 5 demonstrates that treatment effects become more negative as baseline education employment exposure increases, consistent with our interaction term results in Table 6.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{figure4_heterogeneity_quartiles.png}
+    \caption{Effect of College Closures on Employment by Education Exposure Quartile}
+    \label{fig:heterogeneity}
+\end{figure}
+
+\clearpage
+
+\section{Conclusion}
+
+This paper provides evidence on the local labor market effects of college closures using a shift-share identification strategy. Our key finding is that impacts are heterogeneous across counties, with more negative employment effects in areas where education represents a larger share of local employment.
+
+\textbf{Main Results:}
+
+\begin{itemize}
+\item Adding 305 control counties to the 119 treated counties strengthens our identification and yields statistically significant results: a 1 percentage point higher education employment share is associated with a 4.0 percentage point larger decline in employment rates post-closure (p = 0.032)
+
+\item The average treatment effect is positive (+0.44pp), but this masks substantial heterogeneity across exposure levels
+
+\item Effects are most pronounced in the highest exposure quartile
+
+\item Unemployment effects show marginally significant heterogeneity in the treated-only specification (p = 0.058)
+
+\item No significant wage effects detected in median specifications
+\end{itemize}
+
+\textbf{Policy Implications:}
+
+\begin{enumerate}
+\item College closures have significant local economic impacts beyond just affecting students
+
+\item Policy responses should be targeted based on local labor market structure
+
+\item Areas with high education sector concentration may require additional economic support
+
+\item Workforce retraining programs may be particularly valuable in high-exposure counties
+\end{enumerate}
+
+\textbf{Limitations and Future Research:}
+
+The addition of 305 control counties substantially strengthens our identification strategy and statistical power. Standard errors are reduced by 58\% compared to the treated-only specification, making our heterogeneity finding statistically significant at the 5\% level (p = 0.032 vs. p = 0.265 without controls). 
+
+However, our sample is geographically limited—the 424 counties come primarily from Florida and surrounding states rather than the entire U.S. This regional focus may limit external validity but provides the advantage of greater comparability between treated and control counties. Future research should examine whether these patterns hold nationally, explore longer-term impacts beyond our 10-year window, and investigate mechanisms including worker migration, business closures, and fiscal impacts on local governments.
+
+\section*{References}
+\begin{itemize}
+\item[] Autor, D.~H., Dorn, D., \& Hanson, G.~H. (2013).
+The China syndrome: Local labor market effects of import competition in the United States.
+\textit{American Economic Review}, 103(6), 2121--2168.
+
+\item[] Burns, R., Brown, L., Heckert, K., Weeden, D., Kim, H., Randolph, B., Pevitz, A., Karamarkovich, S., \& Causey, J. (2022).
+A dream derailed? Investigating the impact of college closures on student outcomes.
+SHEEO \& National Student Clearinghouse Research Center.
+
+\item[] Chetty, R., \& Hendren, N. (2018).
+The impacts of neighborhoods on intergenerational mobility II: County-level estimates.
+\textit{The Quarterly Journal of Economics}, 133(3), 1163--1228.
+
+\item[] Howard, G., \& Weinstein, R. (2022).
+Workhorses of opportunity: Regional universities increase local social mobility.
+Working Paper.
+
+\item[] Howard, G., Weinstein, R., \& Yang, Y. (2022).
+Do universities improve local economic resilience?
+\textit{Review of Economics and Statistics}, Forthcoming.
+
+\item[] Siegfried, J.~J., Sanderson, A.~R., \& McHenry, P. (2007).
+The economic impact of colleges and universities.
+\textit{Economics of Education Review}, 26(5), 546--558.
+\end{itemize}
+
+\end{document}
